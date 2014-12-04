@@ -4,7 +4,7 @@
 # In[29]:
 
 class omim():
-    def __init__(self, file_n = "omim.txt 2"):
+    def __init__(self, file_n = "omim.txt"):
         self.file_name = file_n
 
     def create_omim_dict(self):
