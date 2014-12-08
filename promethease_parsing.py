@@ -9,7 +9,7 @@ import math
 
 ## Parsing the VCF File
 
-# In[ ]:
+# In[1]:
 
 def find_interval(vcf_pos, interval_list):
     """Given a list of a chromosome find the interval where the
@@ -63,14 +63,14 @@ def create_vcf_interval_dict(file_n = "17E.vcf"):
         cur_chrom = initiate[0]
         cur_pos = int(initiate[1])
         vcf_cytohits_dict[cur_chrom] = dict()
-        cur_interval = find_interval(cur_pos, self.cyto_dict[cur_chrom].keys())
+        cur_interval = find_interval(cur_pos, cyto_dict[cur_chrom].keys())
         vcf_cytohits_dict[cur_chrom][cur_interval] = 1
 
         for vcf_record in vcf_file:
             vcf_record = vcf_record.strip().split()
             cur_chrom = vcf_record[0].strip()
             cur_pos = int(vcf_record[1])
-            cur_interval = find_interval(cur_pos, self.cyto_dict[cur_chrom].keys())
+            cur_interval = find_interval(cur_pos, cyto_dict[cur_chrom].keys())
 
             if cur_chrom in vcf_cytohits_dict.keys():
                 if cur_interval in vcf_cytohits_dict[cur_chrom].keys():
@@ -79,9 +79,9 @@ def create_vcf_interval_dict(file_n = "17E.vcf"):
                 vcf_cytohits_dict[cur_chrom] = dict()
                 vcf_cytohits_dict[cur_chrom][cur_interval] = 1
 
-def create_vcf_rs_list(self):
+def create_vcf_rs_list(file_n = "17E.vcf"):
     """Reading the vfc file and to obtain a list of all the rs id's."""
-    with open(file_n = "17E.vcf") as vcf_file:
+    with open(file_n) as vcf_file:
         vcf_rs_ids = list()
         vcf_file.next()
 
@@ -102,14 +102,14 @@ def create_cytogenetic_dict(file_n = "cytoBand.txt"):
 
     with open("cytoBand.txt") as cyto_file:
         #initiating the cyto_dictionary
-        self.cyto_dict = dict()
+        cyto_dict = dict()
         initiate = cyto_file.next().strip().split()
         prev_chrom = initiate[0].replace("chr","")
         for pos in range(1,3):
             initiate[pos] = int(initiate[pos])
         prev_pos = tuple(initiate[1:3])
-        self.cyto_dict[prev_chrom] = dict()
-        self.cyto_dict[prev_chrom][prev_pos] = initiate[3]
+        cyto_dict[prev_chrom] = dict()
+        cyto_dict[prev_chrom][prev_pos] = initiate[3]
 
         #Reading the cytoBand.txt file and filling cyto_dict
         for cyto_loc in cyto_file:
@@ -122,17 +122,17 @@ def create_cytogenetic_dict(file_n = "cytoBand.txt"):
             cur_pos = tuple(cyto_loc[1:3])
 
             if cur_chrom == prev_chrom:
-                self.cyto_dict[cur_chrom][cur_pos] = cyto_loc[3]
+                cyto_dict[cur_chrom][cur_pos] = cyto_loc[3]
 
             else:
-                self.cyto_dict[cur_chrom] = dict()
-                self.cyto_dict[cur_chrom][cur_pos] = cyto_loc[3]
+                cyto_dict[cur_chrom] = dict()
+                cyto_dict[cur_chrom][cur_pos] = cyto_loc[3]
                 prev_chrom = cur_chrom
 
 
 ## Parsing the omim.txt File
 
-# In[2]:
+# In[ ]:
 
 def create_omim_dict(file_n = "omim.txt"):
     """Opening the OMIM.txt.Z file and creating a dictionary.
@@ -220,6 +220,9 @@ def create_omim_df(omim_dict):
     omim_df = pd.concat([pd.Series(NO_list), pd.Series(TI_list), pd.Series(TX_list)], axis = 1)
     omim_df.columns = ["mim_id", "TI", "TX"]
     return omim_df
+
+
+# In[2]:
 
 def create_description_dict(text):
     """Fills the information of the omim_txt object. 
