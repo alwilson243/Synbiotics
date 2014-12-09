@@ -1,7 +1,7 @@
 Quick Information
 total snp to omim mappings (in snp_omim): 1339
-total rs numbers (in 17E.txt): 6521408
-total records in (omim.txt 2): 23836
+total rs IDs (in 17E.txt): 6521408
+total records in (omim.txt): 23836
 
 ********************************************************************************
 
@@ -56,15 +56,15 @@ Obtained from the dbSNP database.
 ********************************************************************************
 
 Python File Descriptions:
-omim_parsing.py/omim_parsing.ipynb - 
-Extracts information from omim database files. Currently only parses the
-omim.txt file for each of the records.
 
-promethease.ipynb - 
-Imports omim_parsing.py as well as vcf_parsing.py and uses their functions
-to currently map from the vcf file 
+promethease.ipynb/.py - 
+Imports contains all of the parsing fucntions. 
 
-vcf_parsing.py/vcf_parsing.ipynb - 
-Parses the 17E.vcf into rs id's. 
+snp_mapping.ipynb -
+Maps using the rs IDs.
+
+cyto_mapping.ipynb -
+Maps using the cytogenetic location.
+
 
  
