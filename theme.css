@@ -1,0 +1,23 @@
+body {
+    background-color: #0099CC;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+}
+
+ul { 
+    list-style-type: none; 
+}
+
+li {
+    font-family: "Calibri";
+    font-size: 16px;
+}
+
+div {
+    background-color: #E0E0EB;
+    color: black;
+    border: 2px solid;
+}
